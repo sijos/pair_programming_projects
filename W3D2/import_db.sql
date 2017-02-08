@@ -56,14 +56,20 @@ INSERT INTO
 VALUES
   ('why is it sequel and not sql?', 'this seems stupid', 2),
   ('what is the meaning of life?', NULL, 1),
-  ('why is it raining all the time?', 'should I buy an umbrella?', 2);
+  ('why is it raining all the time?', 'should I buy an umbrella?', 2),
+  ('what''s your favorite fruit?', NULL, 3),
+  ('how many people live in SF?', 'seems kinda crowded', 1);
 
   INSERT INTO
     question_follows (user_id, question_id)
   VALUES
     (1, 2),
     (2, 3),
-    (1, 3);
+    (1, 3),
+    (2, 1),
+    (1, 1),
+    (3, 3),
+    (3, 4);
 
   INSERT INTO
     replies (question_id, parent_id, user_id, body)

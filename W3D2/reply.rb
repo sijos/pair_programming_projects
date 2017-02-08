@@ -1,15 +1,7 @@
 require_relative 'questions_db.rb'
+require_relative 'model_base.rb'
 
-class Reply
-  def self.find_by_id(id)
-    reply = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT * FROM relpies WHERE id = ?
-    SQL
-
-    return nil if reply.empty?
-    Reply.new(reply.first)
-  end
-
+class Reply < ModelBase
   def self.find_by_user_id(user_id)
     replies = QuestionsDatabase.instance.execute(<<-SQL, user_id)
       SELECT * FROM replies WHERE user_id = ?
@@ -48,10 +40,30 @@ class Reply
 
   def child_replies
     child = QuestionsDatabase.instance.execute(<<-SQL)
-      SELECT * FROM replies WHERE parent_id = id
+      SELECT * FROM replies WHERE parent_id = #{@id}
     SQL
-    
-    find_by_id()
+
+    return nil if child.empty?
+    Reply.new(child.first)
   end
+
+  # def save
+  #   if @id
+  #     # update
+  #     QuestionsDatabase.instance.execute(<<-SQL, @question_id, @user_id, @parent_id, @body, @id)
+  #       UPDATE replies
+  #       SET question_id = ?, user_id = ?, parent_id = ?, body = ?
+  #       WHERE id = ?
+  #     SQL
+  #   else
+  #     # create
+  #     QuestionsDatabase.instance.execute(<<-SQL, @question_id, @user_id, @parent_id, @body)
+  #       INSERT INTO replies (question_id, user_id, parent_id, body)
+  #       VALUES (?, ?, ?, ?)
+  #     SQL
+  #
+  #     @id = QuestionsDatabase.instance.last_insert_row_id
+  #   end
+  # end
 
 end
