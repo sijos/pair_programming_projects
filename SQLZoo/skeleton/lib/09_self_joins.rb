@@ -179,15 +179,16 @@ def start_at_craiglockhart
   # by taking one bus, including 'Craiglockhart' itself. Include the stop name,
   # as well as the company and bus no. of the relevant service.
   execute(<<-SQL)
-    SELECT DISTINCT stops.name, company, num
-    FROM routes
-    JOIN stops on routes.stop_id = stops.id
-    WHERE num IN (
-      SELECT num
-      FROM routes
-      WHERE stop_id = 53
-      GROUP BY num
-    ) AND company = 'LRT'
+    SELECT end_stops.name, end_routes.company, end_routes.num
+    FROM routes AS start_routes
+    JOIN routes AS end_routes ON start_routes.num = end_routes.num
+      AND start_routes.company = end_routes.company
+    JOIN stops AS end_stops on end_routes.stop_id = end_stops.id
+    WHERE start_routes.stop_id = (
+      SELECT stops.id
+      FROM stops
+      WHERE name = 'Craiglockhart'
+    )
   SQL
 end
 
@@ -196,5 +197,24 @@ def craiglockhart_to_sighthill
   # Sighthill. Show the bus no. and company for the first bus, the name of the
   # stop for the transfer, and the bus no. and company for the second bus.
   execute(<<-SQL)
+    SELECT DISTINCT start_routes.num, start_routes.company, xfer_stops.name,
+      end_routes.num, end_routes.company
+    FROM routes AS start_routes
+    JOIN routes AS first_xfer ON start_routes.num = first_xfer.num AND
+      start_routes.company = first_xfer.company
+    JOIN stops AS xfer_stops ON first_xfer.stop_id = xfer_stops.id
+    JOIN routes AS second_xfer ON xfer_stops.id = second_xfer.stop_id
+    JOIN routes AS end_routes ON second_xfer.num = end_routes.num AND
+      second_xfer.company = end_routes.company
+    WHERE start_routes.stop_id = (
+      SELECT id
+      FROM stops
+      WHERE name = 'Craiglockhart'
+    ) AND end_routes.stop_id = (
+      SELECT id
+      FROM stops
+      WHERE name = 'Sighthill'
+    )
+
   SQL
 end
