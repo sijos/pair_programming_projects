@@ -1,0 +1,21 @@
+<h1> Here Lies <%= @cat.name %>! </h1>
+
+  <h2>Info for <%= @cat.name %>: </h2>
+
+  <table border="1">
+    <colgroup span ="5"></colgroup>
+    <tr>
+      <th>Birth Date</th>
+      <th>Age</th>
+      <th>Color</th>
+      <th>Sex</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td> <%= @cat.birth_date %> </td>
+      <td> <%= @cat.age %> </td>
+      <td> <%= @cat.color %> </td>
+      <td> <%= @cat.sex %> </td>
+      <td> <%= @cat.description %> </td>
+    </tr>
+  </table>
