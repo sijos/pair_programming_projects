@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NinetyNineCatsDay1</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<header>
+
+<% method = (current_user.nil? ? :get : :delete) %>
+<% action = (current_user.nil? ? new_sessions_url : sessions_url) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if current_user %>
+    <h3>Hello, <%= current_user.user_name %> </h3>
+    <input type="submit" name="" value="Logout">
+  <% else %>
+    <input type="submit" name="" value="Log-in">
+  <% end %>
+</form>
+</header>
+<body>
+
+
+<%= yield %>
+
+</body>
+</html>
