@@ -1,0 +1,17 @@
+<h1>Login Page</h1>
+
+  <%= render "shared/errors" %>
+
+  <form action="<%= sessions_url %>" method="post">
+    <%= auth_token %>
+
+    <label for="user_email">Enter Email: </label>
+    <input type="text" name="user[email]" id="user_email">
+    <br>
+
+    <label for="user_pw">Enter Password: </label>
+    <input type="password" name="user[password]" id="user_pw">
+    <br>
+
+    <input type="submit" value="Log In">
+  </form>

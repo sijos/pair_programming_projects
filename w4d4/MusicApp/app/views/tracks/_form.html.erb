@@ -1,0 +1,18 @@
+<% action = (track.persisted? ? edit_track_url(track) : tracks_url) %>
+<% method = (track.persisted? ? :patch : :post) %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+
+  <label for="track_name">Enter Track Name:</label>
+  <input type="text" name="track[song_name]" id="track_name" value="<%= track.song_name %>">
+  <br>
+  <br>
+  <label for="lyrics">Enter Lyrics:</label>
+  <textarea name="track[lyrics]" rows="8" cols="80">Lyrics Here</textarea>
+  <br>
+  <% button = (track.persisted? ? 'Update' : 'Submit') + ' Track' %>
+  <input type="submit" value="<%= button %>">
+
+</form>

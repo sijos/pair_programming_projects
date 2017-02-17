@@ -1,0 +1,17 @@
+<h1> <%= @track.song_name %> </h1>
+
+<%= render "shared/errors" %>
+
+<p>
+  <%= @track.lyrics %>
+</p>
+<br>
+
+<h3>Links</h3>
+
+<ul>
+<li> <%= link_to "Add New Track", new_track_url %> </li>
+<li> <%= link_to "Edit #{@track.song_name}", edit_track_url(@track) %> </li>
+<li> <%= link_to "Delete #{@track.song_name}", track_url(@track), method: :delete %> </li>
+<li> add album link </li>
+</ul>

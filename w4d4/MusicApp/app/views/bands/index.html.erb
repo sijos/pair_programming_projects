@@ -1,0 +1,11 @@
+<h1>All Bands</h1>
+
+<%= render "shared/errors" %>
+
+<ul>
+  <% @bands.each do |band| %>
+    <li> <a href="/bands/<%= band.id %>"> <%= band.name %> </a></li>
+  <% end %>
+</ul>
+
+<%= button_to "Input New Band", new_band_url, method: :get %>
