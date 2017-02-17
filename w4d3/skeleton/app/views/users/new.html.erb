@@ -1,0 +1,16 @@
+<%= render "shared/errors" %>
+
+<h1>Enter New User Info: </h1>
+
+
+<form action="<%= users_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="user_name">Username: </label>
+  <input type="text" name="user[user_name]" placeholder="username">
+
+  <label for="password">Password: </label>
+  <input type="password" name="user[password]" placeholder="password">
+
+  <input type="submit" value="Create User">
+</form>
