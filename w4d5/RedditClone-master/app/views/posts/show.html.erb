@@ -1,0 +1,15 @@
+<h1> <%=link_to "#{@post.title}", @post.url%> </h1>
+
+<p><%=@post.content%></p>
+<br>
+
+<%= link_to "Submit new post", new_sub_post_url(@sub), method: :get %> <!-- url? -->
+<br>
+<%= link_to "Back to #{@sub.title}", sub_url(@sub), method: :get %>
+<br>
+<%= link_to "Back to homepage", subs_url, method: :get %>
+<br>
+<% if is_author? %>
+  <%= link_to "Edit post", edit_sub_post_url(@sub, @post), method: :get %><br>
+  <%= link_to "Delete post", post_url(@post), method: :delete %>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>Reddit: the front page of the internet</h1>
+
+<ul>
+
+<% @subs.each do |sub| %>
+  <li><%= link_to "#{sub.title}", sub_url(sub.id), method: :get %></li>
+<% end %>
+
+</ul>
+
+<br>
+
+<%= link_to "Create new subreddit", new_sub_url, method: :get %>

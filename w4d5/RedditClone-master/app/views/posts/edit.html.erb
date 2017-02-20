@@ -1,0 +1,16 @@
+<h1>Edit Post</h1>
+
+<form action="<%= sub_post_url(@sub, @post) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="patch">
+  <label for="post[title]">Title:</label><br>
+    <input type="text" name="post[title]" value="<%=@post.title%>"><br>
+  <label for="post[url]">URL:</label><br>
+    <input type="text" name="post[url]" value="<%= @post.url %>"><br>
+  <label for="post[content]">Enter Post Content:</label><br>
+    <textarea name="post[content]" rows="8" cols="80"><%=@post.content%></textarea>
+    <br>
+  <input type="submit" value="Edit Post">
+</form>
+
+<!-- <%=# 'checked' if @post.sub_ids.include?(sub.id) %> -->
