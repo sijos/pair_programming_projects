@@ -1,5 +1,6 @@
 require 'active_support'
 require 'active_support/core_ext'
+require 'active_support/inflector'
 require 'erb'
 require_relative './session'
 
@@ -20,8 +21,7 @@ class ControllerBase
   def redirect_to(url)
     @res["location"] = url
     @res.status = 302
-    raise "double render error" if @already_built_response
-    @already_built_response = true
+    multi_render_check
   end
 
   # Populate the response with content.
@@ -31,13 +31,17 @@ class ControllerBase
     @res['Content-Type'] = content_type
     @res.write(content)
     @res.finish
-    raise "double render error" if @already_built_response
-    @already_built_response = true
+    multi_render_check
   end
 
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
+    class_name = self.class.to_s.underscore
+    path = "views/#{class_name}/#{template_name}.html.erb"
+    contents = ERB.new(File.read(path)).result(binding)
+
+    render_content(contents, 'text/html')
   end
 
   # method exposing a `Session` object
@@ -46,5 +50,11 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
+  end
+
+  private
+  def multi_render_check
+    raise "double render error" if @already_built_response
+    @already_built_response = true
   end
 end
