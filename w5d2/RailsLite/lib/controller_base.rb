@@ -21,6 +21,7 @@ class ControllerBase
   def redirect_to(url)
     @res["location"] = url
     @res.status = 302
+    session.store_session(@res)
     multi_render_check
   end
 
@@ -31,6 +32,7 @@ class ControllerBase
     @res['Content-Type'] = content_type
     @res.write(content)
     @res.finish
+    session.store_session(@res)
     multi_render_check
   end
 
@@ -40,12 +42,12 @@ class ControllerBase
     class_name = self.class.to_s.underscore
     path = "views/#{class_name}/#{template_name}.html.erb"
     contents = ERB.new(File.read(path)).result(binding)
-
     render_content(contents, 'text/html')
   end
 
   # method exposing a `Session` object
   def session
+    @session ||= Session.new(@req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)
