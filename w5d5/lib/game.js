@@ -1,7 +1,7 @@
 const Asteroid = require("./asteroid");
 
-const DIM_X = 200;
-const DIM_Y = 140;
+const DIM_X = 500;
+const DIM_Y = 400;
 const NUM_ASTEROIDS = 5;
 
 function Game() {
@@ -36,3 +36,5 @@ Game.prototype.draw = function(ctx) {
 Game.prototype.moveObjects = function() {
   this.asteroids.forEach((astr) => astr.move );
 };
+
+module.exports = Game;

@@ -23,6 +23,8 @@ Array.prototype.bubbleSort = function () {
   return this;
 };
 
+console.log([5, 4, 3, 2, 1].bubbleSort());
+
 String.prototype.substrings = function () {
   let array = [];
   for(let i=0; i < this.length; i++) {
