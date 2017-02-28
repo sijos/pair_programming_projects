@@ -1,0 +1,52 @@
+figure {
+  width: 800px;
+}
+
+ul {
+  height: 75px;
+  background-color: orange;
+  border-bottom: 5px solid black;
+  list-style-type: none;
+  /*position: rela stive;*/
+}
+
+.col {
+  float: left;
+  margin-right: 10px;
+  box-sizing: border-box;
+  width: 25%;
+}
+
+.col:last-of-type {
+  margin-right: 0;
+}
+
+li {
+  background-color: blue;
+  height: 20px;
+  display: block;
+  /*text-align: center;*/
+  margin: 0 auto;
+  /*vertical-align: baseline;*/
+  margin-top: 2px;
+  /*position: absolute;
+  bottom: 0;*/
+}
+
+li:first-of-type {
+  /*margin-left: 20px;*/
+}
+
+.first {
+  width: 40px;
+}
+.second {
+  width: 80px;
+}
+.third {
+  width: 120px;
+}
+
+.clicked {
+  background-color: yellow;
+}
