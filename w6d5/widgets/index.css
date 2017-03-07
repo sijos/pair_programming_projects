@@ -1,0 +1,43 @@
+.tabular {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 0;
+}
+
+ul > h1{
+  display: flex;
+  justify-content: space-around;
+  padding-left: 0;
+  border: 1px solid thistle;
+  border-radius: 6px;
+  padding: 5px;
+}
+
+article {
+  border: 1px solid black;
+  width: 300px;
+  height: 250px;
+  background-image: url('https://i2.wp.com/catnamescity.com/wp-content/uploads/2012/08/Female-Tabby-Cat-Names.jpg?resize=300%2C225');
+  text-align: center;
+  font-size: 30px;
+  font-family: sans-serif;
+  background-size: cover;
+}
+
+.tabby {
+  background-image: url('https://i2.wp.com/catnamescity.com/wp-content/uploads/2012/08/Female-Tabby-Cat-Names.jpg?resize=300%2C225')
+}
+
+.tabtastic {
+  background-image: url('https://s-media-cache-ak0.pinimg.com/564x/1b/b5/29/1bb529fc930388dbb2577e8725607293.jpg')
+}
+
+.tabouli {
+  background-image: url('http://2.bp.blogspot.com/-39HxIgIOl6I/U3M2Ouz7CHI/AAAAAAAAZNI/BoEKuSCC6TU/s1600/IMG_3351a.jpg')
+}
